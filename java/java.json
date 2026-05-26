@@ -1,0 +1,322 @@
+{
+  "course_id": "JAVA",
+  "course_name": "Java Programming",
+  "language": "java",
+  "units": [
+    {
+      "unit_number": 1,
+      "unit_name": "Intro to Java, Data, Operators, and Conditions",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Introduction to Java Basics",
+          "topics": [
+            "History and Features of Java",
+            "Java program structure",
+            "Writing simple Java class and main() method"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Java Environment",
+          "topics": [
+            "Command-line arguments",
+            "Understanding JDK, JRE and JVM"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Data In the Cart",
+          "topics": [
+            "Using primitive data types",
+            "Type conversion, Keywords, Identifiers, Variables",
+            "Access modifiers, static keyword, Wrapper class"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Basic Operators",
+          "topics": [
+            "Working with Bit-wise, arithmetic, logical, and relational operators"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Advanced Operators",
+          "topics": [
+            "Unary, assignment and Ternary operator",
+            "Operator precedence"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Conditional Statements",
+          "topics": [
+            "Using if/else constructs and switch-case statements"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 2,
+      "unit_name": "Loops, Arrays, OOP, and Strings",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Basic Loops",
+          "topics": [
+            "Working with for loop, while loop"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Advanced Loops",
+          "topics": [
+            "Working with do-while loop and for-each loop"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Arrays and Enums",
+          "topics": [
+            "Fundamentals about Arrays",
+            "Multi-dimensional arrays",
+            "Array Access and Iterations",
+            "Using varargs, Enumerations"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "OOP Concepts Basics",
+          "topics": [
+            "Basics of class and objects",
+            "Writing constructors and methods"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Advanced OOP Concepts",
+          "topics": [
+            "Overloading methods and constructors",
+            "this keyword, initializer blocks"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "String Class",
+          "topics": [
+            "Constructors and methods of String and String Builder class"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 3,
+      "unit_name": "Inheritance, Polymorphism, and Interfaces",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Inheritance Basics",
+          "topics": [
+            "Inheritance",
+            "Method overriding",
+            "super keyword"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Object Class Methods",
+          "topics": [
+            "Object class and overriding toString() and equals() method"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Keywords in Inheritance",
+          "topics": [
+            "Using super and final keywords"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Type Checking",
+          "topics": [
+            "instanceof operator"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Abstract Classes",
+          "topics": [
+            "Abstract method and abstract class"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Interfaces",
+          "topics": [
+            "Interfaces",
+            "static and default methods"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 4,
+      "unit_name": "Nested Classes, Utilities, and Exceptions",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Nested Classes",
+          "topics": [
+            "Nested Class",
+            "Understanding the importance of static and non-static nested classes",
+            "Local and Anonymous class"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Lambda Expressions",
+          "topics": [
+            "Functional Interface",
+            "Lambda expressions"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Utility Classes",
+          "topics": [
+            "Working with Dates"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Exceptions Basics",
+          "topics": [
+            "Exception overview",
+            "Exception class hierarchy and exception types",
+            "Propagation of exceptions",
+            "Using try, catch and finally for exception handling"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Advanced Exceptions",
+          "topics": [
+            "Usage of throw and throws",
+            "handling multiple exceptions using multi-catch",
+            "Autoclose resources with try-with resources statement"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Custom Exceptions and Assertions",
+          "topics": [
+            "Creating custom exceptions",
+            "Testing invariants by using assertions"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 5,
+      "unit_name": "I/O Fundamentals and Generics",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "I/O Basics",
+          "topics": [
+            "Describing the basics of input and output in Java",
+            "Read and write data from various sources"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "File Streams",
+          "topics": [
+            "Using streams to read and write files"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Serialization",
+          "topics": [
+            "Writing and read objects using serialization"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Generics Basics",
+          "topics": [
+            "Creating a custom generic class"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Type Inference",
+          "topics": [
+            "Using the type inference diamond to create an object"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Advanced Generics",
+          "topics": [
+            "Using bounded types and Wild Cards"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 6,
+      "unit_name": "Collections and Database Programming",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Collections Basics",
+          "topics": [
+            "Creating a collection by using generics"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "List and Queue Collections",
+          "topics": [
+            "Implementing an ArrayList",
+            "Implementing a Deque"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Set Collections",
+          "topics": [
+            "Implementing TreeSet using Comparable and Comparator interfaces"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Map Collections",
+          "topics": [
+            "Implementing a HashMap"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "JDBC Basics",
+          "topics": [
+            "Introduction to JDBC",
+            "JDBC Drivers"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "JDBC Operations",
+          "topics": [
+            "CRUD operation Using JDBC",
+            "Connecting to non-conventional Databases"
+          ]
+        }
+      ]
+    }
+  ]
+}

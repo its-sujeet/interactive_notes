@@ -1,0 +1,334 @@
+{
+  "course_id": "CPP",
+  "course_name": "C++ Programming",
+  "language": "cpp",
+  "units": [
+    {
+      "unit_number": 1,
+      "unit_name": "Concepts and Basics of C++ Programming",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Intro to OOP and Basic I/O",
+          "topics": [
+            "Differences between procedural and object oriented programming paradigms",
+            "Reading and writing data using cin and cout",
+            "Features of Input/output Streams"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Classes and Objects",
+          "topics": [
+            "Creating classes",
+            "Class objects",
+            "Accessing class members"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Advanced Class Concepts",
+          "topics": [
+            "Differences between Structures, Unions, Enumerations and Classes",
+            "Inline and Non-inline member functions",
+            "Static data members and static member functions"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Function Basics",
+          "topics": [
+            "Functions with Default parameters/arguments",
+            "Inline Functions",
+            "Manipulator Functions"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Function Overloading & Friends",
+          "topics": [
+            "Function overloading and Scope rules",
+            "Friend of a class (friend function and friend class)"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Reference Variables & Recursion",
+          "topics": [
+            "Reference variables",
+            "Differences between Call by value, Call by address and call by reference",
+            "Recursion (Function, Member Function)"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 2,
+      "unit_name": "Pointers, Reference Variables, Arrays and String Concepts",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Pointer Basics",
+          "topics": [
+            "Void pointer",
+            "Pointer arithmetic",
+            "Pointer to pointer"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Pointer Problems & References",
+          "topics": [
+            "Possible problems with the use of pointers - Dangling pointer, Wild pointer, Null pointer assignment",
+            "Differences between pointer and reference variables"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Pointers and Classes",
+          "topics": [
+            "Classes containing pointers",
+            "Pointer to objects",
+            "this pointer",
+            "Pointer to data member"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Arrays and Multidimensional Arrays",
+          "topics": [
+            "Array declaration and processing of multidimensional arrays(inside main and inside class)",
+            "Array of objects"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "String Class Basics",
+          "topics": [
+            "The Standard C++ string class-defining and assigning string objects"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "String Operations",
+          "topics": [
+            "Member functions",
+            "Modifiers of string class"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 3,
+      "unit_name": "Data File Operations and Constructors",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "File Fundamentals",
+          "topics": [
+            "Opening and closing of files",
+            "Modes of file",
+            "File stream functions"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "File Read/Write and Access Modes",
+          "topics": [
+            "Reading/Writing of files",
+            "Sequential access and random access file processing",
+            "Binary file operations"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Classes, Structures and Files",
+          "topics": [
+            "Classes and file operations",
+            "Structures and file operation"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Manager Functions Basics",
+          "topics": [
+            "Manager functions (constructors and destructor)",
+            "Default constructor",
+            "Destructors"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Parameterized Constructors",
+          "topics": [
+            "Constructor with default arguments",
+            "Parameterized constructor"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Copy Constructors & Initializer Lists",
+          "topics": [
+            "Copy constructor",
+            "Initializer lists"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 4,
+      "unit_name": "Operator Overloading and Inheritance",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Operator Overloading",
+          "topics": [
+            "Operator Overloading (unary operator, binary operator overloading)"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Type Conversions",
+          "topics": [
+            "Type conversions - basic type to class type, class type to basic type"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Inheritance Basics & Modes",
+          "topics": [
+            "Inheritance Basics – derived class and base class",
+            "Modes (private, protected, public inheritance)"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Types of Inheritance",
+          "topics": [
+            "Types (simple, multi-level, multiple and hierarchical)"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Ambiguities & Virtual Base Class",
+          "topics": [
+            "Resolving ambiguities in inheritance",
+            "Virtual base class"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Overriding & Composition",
+          "topics": [
+            "Overriding member functions",
+            "Order of execution of constructors and destructors",
+            "Aggregation and Composition"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 5,
+      "unit_name": "Dynamic Memory Management and Polymorphism",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Dynamic Memory",
+          "topics": [
+            "Dynamic memory allocation using new and delete operators",
+            "Memory leak and allocation failures"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Binding & Compile Time Polymorphism",
+          "topics": [
+            "Compile and run time polymorphism",
+            "Early binding and late binding"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Run Time Polymorphism",
+          "topics": [
+            "Virtual functions",
+            "Pure virtual functions"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Abstract Classes",
+          "topics": [
+            "Abstract classes and concrete class"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Dynamic Constructors & Destructors",
+          "topics": [
+            "Dynamic constructors",
+            "Virtual destructors"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Self-Referential Classes",
+          "topics": [
+            "Introduction to Self-Referential class"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 6,
+      "unit_name": "Exception Handling, Templates and Standard Template Library (STL)",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Exception Handling Basics",
+          "topics": [
+            "Basics of exception handling",
+            "Exception handling mechanism"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Exception Mechanisms",
+          "topics": [
+            "Throwing mechanism",
+            "Catching mechanism",
+            "Rethrowing an exception"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Function & Class Templates",
+          "topics": [
+            "Function template and class template"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Advanced Templates",
+          "topics": [
+            "Class template with inheritance"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Intro to STL",
+          "topics": [
+            "Introduction to STL- Containers, Algorithms and iterators"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "STL Containers",
+          "topics": [
+            "Container - Vector and List"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+{
+  "course_id": "DSA",
+  "course_name": "Data Structures and Algorithms",
+  "language": "cpp",
+  "units": [
+    {
+      "unit_number": 1,
+      "unit_name": "Introduction, Arrays, Sorting and Searching",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Basic Concepts",
+          "topics": [
+            "Basic Concepts and Notations",
+            "Complexity analysis: time space and trade off"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Complexity Notation & Basic Structures",
+          "topics": [
+            "Omega Notation, Theta Notation, Big O notation",
+            "Basic Data Structures"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Linear Arrays",
+          "topics": [
+            "Linear arrays: memory representation"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Array Operations",
+          "topics": [
+            "Array operations: traversal, insertion, deletion, sorting, searching and merging and their complexity analysis"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Sorting Techniques",
+          "topics": [
+            "Bubble sort",
+            "Insertion sort",
+            "Selection sort"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Searching Techniques",
+          "topics": [
+            "Searching: Linear Search and Binary Search"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 2,
+      "unit_name": "Linked Lists",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Linked List Intro",
+          "topics": [
+            "Introduction",
+            "Memory representation"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Allocation and Traversal",
+          "topics": [
+            "Allocation",
+            "Traversal"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Insertion Operations",
+          "topics": [
+            "Insertion"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Deletion Operations",
+          "topics": [
+            "Deletion"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Header Linked Lists",
+          "topics": [
+            "Header linked lists: Grounded and Circular"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Two-way Linked Lists",
+          "topics": [
+            "Two-way lists: operations on two way linked lists"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 3,
+      "unit_name": "Stacks and Queue",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Stack Representations",
+          "topics": [
+            "Introduction: List and Array representations"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Stack Operations",
+          "topics": [
+            "Operations on stack (traversal, push and pop)"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Polish Notations & Expressions",
+          "topics": [
+            "Arithmetic expressions: polish notation, evaluation and transformation of expressions"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Queue Representations",
+          "topics": [
+            "Array and list representation"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Queue Operations",
+          "topics": [
+            "Operations (traversal, insertion and deletion)"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Advanced Queues",
+          "topics": [
+            "Priority Queues",
+            "Deques"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 4,
+      "unit_name": "Trees and Recursion",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Binary Trees Basics",
+          "topics": [
+            "Binary trees: introduction (complete and extended binary trees)",
+            "Memory representation (linked, sequential)"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Binary Search Tree Operations",
+          "topics": [
+            "Binary Search Tree: introduction",
+            "Searching, insertion and deletion"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Tree Traversals 1",
+          "topics": [
+            "In-order traversal",
+            "Pre-order traversal"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Tree Traversals 2",
+          "topics": [
+            "Post-order traversal using recursion"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Recursion Basics",
+          "topics": [
+            "Introduction",
+            "Recursive implementation of Towers of Hanoi"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Recursive Sorting",
+          "topics": [
+            "Merge sort",
+            "Quick sort"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 5,
+      "unit_name": "Heaps and Hashing",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Heap Basics",
+          "topics": [
+            "Heaps: Introduction"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Heap Operations",
+          "topics": [
+            "Insertion",
+            "Deletion"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "HeapSort",
+          "topics": [
+            "HeapSort"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Hashing Introduction",
+          "topics": [
+            "Hashing introduction: hash functions, hash table"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Open Hashing",
+          "topics": [
+            "Open hashing (separate chaining)"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Closed Hashing",
+          "topics": [
+            "Closed hashing (open addressing): linear probing, quadratic probing and double hashing"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_number": 6,
+      "unit_name": "Graphs",
+      "lectures": [
+        {
+          "lecture_number": 1,
+          "lecture_name": "Graph Traversal BFS",
+          "topics": [
+            "Graph Traversal: BFS"
+          ]
+        },
+        {
+          "lecture_number": 2,
+          "lecture_name": "Graph Traversal DFS",
+          "topics": [
+            "Graph Traversal: DFS"
+          ]
+        },
+        {
+          "lecture_number": 3,
+          "lecture_name": "Shortest Path Introduction",
+          "topics": [
+            "Shortest path algorithm basics"
+          ]
+        },
+        {
+          "lecture_number": 4,
+          "lecture_name": "Dijkstra’s Algorithm",
+          "topics": [
+            "Dijkstra’s Algorithm"
+          ]
+        },
+        {
+          "lecture_number": 5,
+          "lecture_name": "Bellman-Ford Algorithm",
+          "topics": [
+            "Bellman-Ford Algorithm"
+          ]
+        },
+        {
+          "lecture_number": 6,
+          "lecture_name": "Floyd Warshall Algorithm",
+          "topics": [
+            "Floyd Warshall Algorithm"
+          ]
+        }
+      ]
+    }
+  ]
+}

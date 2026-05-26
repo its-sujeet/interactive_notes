@@ -1,0 +1,687 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import {
+    Binary,
+    Cpu,
+    Zap,
+    ArrowRight,
+    ArrowLeft,
+    Check,
+    X,
+    Lock,
+    Unlock,
+    Eye,
+    Code,
+    Layers,
+    Shuffle,
+    Database,
+    Terminal,
+    Shield,
+    FileKey,
+    Hash,
+    Minus,
+    RefreshCw,
+    Power
+} from 'lucide-react';
+
+// --- SHARED COMPONENTS ---
+
+const SectionHeader = ({ title, icon: Icon, color = "purple" }: { title: string, icon: any, color?: string }) => (
+    <div className="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
+        <span className={`bg-${color}-600/20 text-${color}-400 p-2 rounded-lg`}>
+            <Icon size={24} />
+        </span>
+        <h2 className="text-2xl font-bold text-white">{title}</h2>
+    </div>
+);
+
+const CodeBlock = ({ code, title }: { code: string, title?: string }) => (
+    <div className="bg-[#0d1117] rounded-lg overflow-hidden border border-slate-700 my-4 shadow-xl font-mono text-sm w-full">
+        <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-slate-700">
+            <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+            </div>
+            <span className="text-xs text-slate-500 uppercase">{title || "C Code"}</span>
+        </div>
+        <div className="p-4 text-slate-300 overflow-x-auto whitespace-pre">
+            {code}
+        </div>
+    </div>
+);
+
+const DeepDiveCard = ({ title, children, variant = 'purple' }: { title: string, children: React.ReactNode, variant?: string }) => {
+    const colors: Record<string, string> = {
+        blue: 'border-blue-500 bg-blue-900/10',
+        purple: 'border-purple-500 bg-purple-900/10',
+        orange: 'border-orange-500 bg-orange-900/10',
+        red: 'border-red-500 bg-red-900/10',
+        green: 'border-green-500 bg-green-900/10'
+    };
+
+    return (
+        <div className={`border-l-4 ${colors[variant]} rounded-r-lg p-6 my-6 transition-all hover:bg-opacity-20 backdrop-blur-sm`}>
+            <h4 className="text-lg font-bold text-white flex items-center gap-2 mb-3">
+                {title}
+            </h4>
+            <div className="text-slate-300 text-sm leading-relaxed space-y-2">
+                {children}
+            </div>
+        </div>
+    );
+};
+
+// --- INTERACTIVE COMPONENTS ---
+
+const BitRender = ({ val, active = false, label, onClick }: { val: string, active?: boolean, label?: string, onClick?: () => void }) => (
+    <div className="flex flex-col items-center gap-1 group">
+        {label && <span className="text-[10px] text-slate-500 font-mono mb-1">{label}</span>}
+        <div
+            onClick={onClick}
+            className={`w-10 h-12 flex items-center justify-center rounded font-mono text-xl font-bold border-2 transition-all duration-300 cursor-pointer
+      ${val === '1'
+                    ? 'bg-purple-600 text-white border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.6)] scale-105'
+                    : 'bg-slate-900 text-slate-600 border-slate-800 hover:border-slate-600'
+                }
+      ${active ? 'ring-2 ring-yellow-400 z-10' : ''}
+    `}>
+            {val}
+        </div>
+        {label && <span className="text-[9px] text-slate-600 font-mono mt-1 group-hover:text-purple-400 transition-colors">2^{label}</span>}
+    </div>
+);
+
+const BinaryAnvil = () => {
+    const [byte, setByte] = useState(0);
+
+    const toggleBit = (index: number) => {
+        setByte(byte ^ (1 << index));
+    };
+
+    return (
+        <div className="bg-[#0f172a] p-6 rounded-xl border border-slate-700 my-8">
+            <div className="flex justify-between items-center mb-6">
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Hash size={20} className="text-blue-400" /> The Binary Anvil
+                </h3>
+                <button onClick={() => setByte(0)} className="text-xs text-slate-500 hover:text-white flex items-center gap-1">
+                    <RefreshCw size={12} /> Reset
+                </button>
+            </div>
+
+            <div className="flex justify-center gap-2 mb-8 overflow-x-auto p-2">
+                {[7, 6, 5, 4, 3, 2, 1, 0].map(i => (
+                    <BitRender
+                        key={i}
+                        val={(byte & (1 << i)) ? '1' : '0'}
+                        label={String(i)}
+                        onClick={() => toggleBit(i)}
+                    />
+                ))}
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+                <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+                    <div className="text-xs text-slate-500 font-bold uppercase mb-1">Decimal</div>
+                    <div className="text-4xl font-black text-white">{byte}</div>
+                </div>
+                <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+                    <div className="text-xs text-slate-500 font-bold uppercase mb-1">Hexadecimal</div>
+                    <div className="text-4xl font-black text-yellow-400">0x{byte.toString(16).toUpperCase().padStart(2, '0')}</div>
+                </div>
+            </div>
+
+            <p className="text-center text-xs text-slate-500 mt-4">Click the bits above to toggle them!</p>
+        </div>
+    );
+};
+
+const TwosComplementLab = () => {
+    const [val, setVal] = useState(5);
+
+    // 8-bit simulation
+    const positive = val;
+    const inverted = (~val) & 0xFF; // Mask to 8 bits
+    const twosComp = (inverted + 1) & 0xFF;
+
+    const toBin = (n: number) => n.toString(2).padStart(8, '0');
+
+    return (
+        <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 my-8">
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <Minus size={20} className="text-red-400" /> The Negative Realm (Two's Complement)
+            </h3>
+            <p className="text-sm text-slate-400 mb-6">
+                Computers don't have minus signs. To store <strong>-{val}</strong>, they invert the bits of {val} and add 1.
+            </p>
+
+            <div className="flex justify-center mb-6">
+                <input
+                    type="number" min="0" max="127" value={val}
+                    onChange={(e) => setVal(Math.max(0, Math.min(127, parseInt(e.target.value) || 0)))}
+                    className="bg-slate-950 border border-slate-600 rounded p-2 text-white w-24 text-center font-bold"
+                />
+            </div>
+
+            <div className="space-y-2 font-mono text-sm md:text-base">
+                {/* Step 1 */}
+                <div className="flex justify-between items-center bg-slate-900 p-3 rounded border border-slate-800">
+                    <span className="text-slate-400">Original ({val})</span>
+                    <span className="text-blue-400">{toBin(positive)}</span>
+                </div>
+
+                <div className="flex justify-center text-slate-600">↓ Invert Bits (~)</div>
+
+                {/* Step 2 */}
+                <div className="flex justify-between items-center bg-slate-900 p-3 rounded border border-slate-800">
+                    <span className="text-slate-400">One's Complement</span>
+                    <span className="text-purple-400">{toBin(inverted)}</span>
+                </div>
+
+                <div className="flex justify-center text-slate-600">↓ Add 1</div>
+
+                {/* Step 3 */}
+                <div className="flex justify-between items-center bg-[#020617] p-3 rounded border border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                    <span className="text-white font-bold">Two's Comp (-{val})</span>
+                    <span className="text-green-400 font-bold">{toBin(twosComp)}</span>
+                </div>
+            </div>
+
+            <div className="mt-4 text-xs text-center text-slate-500">
+                In C code: <code>~{val} + 1</code> is how the CPU calculates <code>-{val}</code>.
+            </div>
+        </div>
+    );
+};
+
+const BitManipulator = () => {
+    const [val, setVal] = useState(0);
+    const [bitIndex, setBitIndex] = useState(0);
+
+    const perform = (action: string) => {
+        switch (action) {
+            case 'SET': setVal(val | (1 << bitIndex)); break;
+            case 'CLEAR': setVal(val & ~(1 << bitIndex)); break;
+            case 'TOGGLE': setVal(val ^ (1 << bitIndex)); break;
+        }
+    };
+
+    const isSet = (val & (1 << bitIndex)) !== 0;
+
+    return (
+        <div className="bg-[#0f172a] p-6 rounded-xl border border-slate-700 my-8">
+            <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <Cpu size={20} className="text-orange-400" /> The Bit Manipulator
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                    <div className="flex justify-between mb-2">
+                        <span className="text-xs text-slate-500 font-bold">TARGET VALUE</span>
+                        <span className="text-xs text-slate-500 font-bold">INDEX: {bitIndex}</span>
+                    </div>
+                    <div className="flex justify-center gap-1 mb-6 bg-black/20 p-2 rounded">
+                        {[7, 6, 5, 4, 3, 2, 1, 0].map(i => (
+                            <div
+                                key={i}
+                                onClick={() => setBitIndex(i)}
+                                className={`w-8 h-10 flex items-center justify-center rounded font-mono text-sm border cursor-pointer transition-all
+                  ${i === bitIndex ? 'border-yellow-400 bg-slate-800 text-white' : 'border-slate-800 text-slate-600'}
+                  ${(val & (1 << i)) ? 'text-green-400 font-bold' : ''}
+                `}
+                            >
+                                {(val & (1 << i)) ? 1 : 0}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                        <button onClick={() => perform('SET')} className="bg-green-900/30 border border-green-600 text-green-400 py-2 rounded text-xs font-bold hover:bg-green-900/50">SET (|)</button>
+                        <button onClick={() => perform('CLEAR')} className="bg-red-900/30 border border-red-600 text-red-400 py-2 rounded text-xs font-bold hover:bg-red-900/50">CLEAR (&~)</button>
+                        <button onClick={() => perform('TOGGLE')} className="col-span-2 bg-blue-900/30 border border-blue-600 text-blue-400 py-2 rounded text-xs font-bold hover:bg-blue-900/50">TOGGLE (^)</button>
+                    </div>
+                </div>
+
+                <div className="flex flex-col justify-center space-y-4">
+                    <div className="bg-slate-900 p-4 rounded border border-slate-800">
+                        <span className="text-xs text-slate-500 block mb-1">Code for Action:</span>
+                        <code className="text-sm text-yellow-300 block mb-2">
+                            val = val | (1 &lt;&lt; {bitIndex});
+                        </code>
+                        <code className="text-sm text-yellow-300 block mb-2">
+                            val = val & ~(1 &lt;&lt; {bitIndex});
+                        </code>
+                        <code className="text-sm text-yellow-300 block">
+                            val = val ^ (1 &lt;&lt; {bitIndex});
+                        </code>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-slate-400">
+                        <div className={`w-3 h-3 rounded-full ${isSet ? 'bg-green-500' : 'bg-slate-700'}`}></div>
+                        Bit {bitIndex} is {isSet ? 'ON' : 'OFF'}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const BitwiseBunker = () => {
+    const [a, setA] = useState(5); // 00000101
+    const [b, setB] = useState(3); // 00000011
+    const [op, setOp] = useState('&');
+
+    const toBin = (n: number) => n.toString(2).padStart(8, '0');
+
+    const calculate = () => {
+        switch (op) {
+            case '&': return a & b;
+            case '|': return a | b;
+            case '^': return a ^ b;
+            default: return 0;
+        }
+    };
+
+    const res = calculate();
+    const binA = toBin(a);
+    const binB = toBin(b);
+    const binRes = toBin(res);
+
+    return (
+        <div className="bg-[#0f172a] p-6 rounded-xl border border-slate-700 my-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
+                <Binary size={150} />
+            </div>
+
+            <div className="flex flex-wrap gap-4 mb-8 z-10 relative">
+                <div className="flex items-center gap-2 bg-slate-900 p-2 rounded border border-slate-800">
+                    <span className="text-xs font-bold text-slate-500">A:</span>
+                    <input type="number" value={a} onChange={e => setA(Number(e.target.value))} className="w-16 bg-transparent text-white font-mono outline-none" />
+                </div>
+                <div className="flex items-center gap-2 bg-slate-900 p-2 rounded border border-slate-800">
+                    <span className="text-xs font-bold text-slate-500">B:</span>
+                    <input type="number" value={b} onChange={e => setB(Number(e.target.value))} className="w-16 bg-transparent text-white font-mono outline-none" />
+                </div>
+                <div className="flex gap-1 ml-auto">
+                    {['&', '|', '^'].map(o => (
+                        <button
+                            key={o}
+                            onClick={() => setOp(o)}
+                            className={`w-10 h-10 rounded font-bold font-mono text-lg transition-all ${op === o ? 'bg-purple-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
+                        >
+                            {o}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* BIT GRID */}
+            <div className="space-y-4">
+                {/* Row A */}
+                <div className="flex justify-center md:justify-end items-center gap-2">
+                    <span className="text-slate-500 font-mono mr-4 hidden md:inline">A ({a})</span>
+                    {binA.split('').map((bit, i) => <BitRender key={i} val={bit} label={String(7 - i)} />)}
+                </div>
+
+                {/* Operator */}
+                <div className="flex justify-center md:justify-end pr-4 text-purple-400 font-bold text-xl my-2">
+                    {op === '&' ? "AND (&)" : op === '|' ? "OR (|)" : "XOR (^)"}
+                </div>
+
+                {/* Row B */}
+                <div className="flex justify-center md:justify-end items-center gap-2">
+                    <span className="text-slate-500 font-mono mr-4 hidden md:inline">B ({b})</span>
+                    {binB.split('').map((bit, i) => <BitRender key={i} val={bit} />)}
+                </div>
+
+                <div className="h-px bg-slate-700 w-full my-4"></div>
+
+                {/* Result */}
+                <div className="flex justify-center md:justify-end items-center gap-2">
+                    <span className="text-green-400 font-mono mr-4 font-bold hidden md:inline">Result ({res})</span>
+                    {binRes.split('').map((bit, i) => <BitRender key={i} val={bit} active={bit === '1'} />)}
+                </div>
+            </div>
+
+            {/* Logic Explanation */}
+            <div className="mt-8 p-4 bg-black/30 rounded-lg border border-slate-800 text-sm text-center text-slate-300">
+                {op === '&' && "Rule: Result is 1 only if BOTH bits are 1."}
+                {op === '|' && "Rule: Result is 1 if EITHER bit is 1."}
+                {op === '^' && "Rule: Result is 1 if bits are DIFFERENT."}
+            </div>
+        </div>
+    );
+};
+
+const ShiftVisualizer = () => {
+    const [val, setVal] = useState(5);
+    const [shifts, setShifts] = useState(0);
+
+    const shiftedVal = val << shifts;
+    const binOriginal = val.toString(2).padStart(8, '0');
+
+    return (
+        <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 my-8">
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <ArrowLeft size={20} className="text-green-400" /> Left Shift Operator ( &lt;&lt; )
+            </h3>
+            <p className="text-sm text-slate-400 mb-6">
+                Shifting bits to the left creates empty spaces on the right, filled with 0s.
+                Each shift effectively <strong>multiplies by 2</strong>.
+            </p>
+
+            <div className="flex items-center justify-center gap-4 mb-8">
+                <input
+                    type="number" value={val} onChange={e => { setVal(Number(e.target.value)); setShifts(0); }}
+                    className="bg-slate-950 border border-slate-600 rounded p-2 text-white w-20 text-center"
+                />
+                <span className="text-green-400 font-bold font-mono">&lt;&lt;</span>
+                <div className="flex items-center bg-slate-950 rounded border border-slate-600">
+                    <button onClick={() => setShifts(Math.max(0, shifts - 1))} className="px-3 py-1 hover:bg-slate-800">-</button>
+                    <span className="px-3 font-mono text-white">{shifts}</span>
+                    <button onClick={() => setShifts(shifts + 1)} className="px-3 py-1 hover:bg-slate-800">+</button>
+                </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-4">
+                {/* Visual Array */}
+                <div className="flex gap-1 p-2 bg-black/20 rounded-lg relative overflow-hidden">
+                    {/* Animated Bits */}
+                    {binOriginal.split('').map((bit, i) => (
+                        <div
+                            key={i}
+                            className={`w-10 h-12 flex items-center justify-center rounded border font-mono font-bold text-lg transition-transform duration-500
+                ${bit === '1' ? 'bg-blue-600 border-blue-400 text-white' : 'bg-slate-800 border-slate-700 text-slate-600'}
+              `}
+                            style={{ transform: `translateX(-${shifts * 44}px)` }}
+                        >
+                            {bit}
+                        </div>
+                    ))}
+
+                    {/* Incoming Zeros */}
+                    {[...Array(shifts)].map((_, i) => (
+                        <div
+                            key={`z-${i}`}
+                            className="absolute top-2 w-10 h-12 flex items-center justify-center rounded border bg-green-900/20 border-green-500/50 text-green-400 font-mono font-bold animate-in fade-in slide-in-from-right"
+                            style={{ right: 8 + (shifts - 1 - i) * 44 }}
+                        >
+                            0
+                        </div>
+                    ))}
+                </div>
+
+                <div className="mt-4 text-center">
+                    <div className="text-xs text-slate-500 uppercase font-bold mb-1">Decimal Result</div>
+                    <div className="text-3xl font-black text-green-400">
+                        {val} × 2<sup>{shifts}</sup> = {val * Math.pow(2, shifts)}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const XorSwap = () => {
+    const [step, setStep] = useState(0);
+    const [a, setA] = useState(5); // 101
+    const [b, setB] = useState(3); // 011
+
+    const steps = [
+        { code: "// Initial State", a: 5, b: 3, desc: "A = 5 (101), B = 3 (011)" },
+        { code: "a = a ^ b;", a: 5 ^ 3, b: 3, desc: "A becomes 6 (110). B stays 3." },
+        { code: "b = a ^ b;", a: 6, b: 6 ^ 3, desc: "B becomes 5 (101). (Wait, that's old A!)" },
+        { code: "a = a ^ b;", a: 6 ^ 5, b: 5, desc: "A becomes 3 (011). (That's old B!)" },
+    ];
+
+    useEffect(() => {
+        setA(steps[step].a);
+        setB(steps[step].b);
+    }, [step]);
+
+    return (
+        <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700 my-8">
+            <div className="flex justify-between items-center mb-6">
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Shuffle size={20} className="text-pink-400" /> The Magic XOR Swap
+                </h3>
+                <button
+                    onClick={() => setStep((step + 1) % 4)}
+                    className="bg-pink-600 text-white px-4 py-1 rounded-full text-xs font-bold hover:bg-pink-500 transition-colors"
+                >
+                    {step === 3 ? "Reset" : "Next Step"}
+                </button>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-2">
+                    {steps.map((s, i) => (
+                        <div
+                            key={i}
+                            className={`p-3 rounded border transition-all duration-300 font-mono text-sm
+                ${step === i ? 'bg-pink-900/20 border-pink-500 text-white scale-105' : 'bg-slate-950 border-slate-800 text-slate-500'}
+              `}
+                        >
+                            {s.code}
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex justify-center gap-8">
+                    <div className="text-center">
+                        <div className="text-xs text-slate-500 font-bold mb-2">Var A</div>
+                        <div className={`w-20 h-20 rounded-xl flex items-center justify-center text-3xl font-black border-2 transition-all duration-500 ${step > 0 ? 'bg-pink-600 text-white border-pink-400' : 'bg-slate-800 text-slate-400 border-slate-600'}`}>
+                            {a}
+                        </div>
+                        <div className="font-mono text-xs text-slate-500 mt-2">{a.toString(2).padStart(3, '0')}</div>
+                    </div>
+
+                    <div className="text-center">
+                        <div className="text-xs text-slate-500 font-bold mb-2">Var B</div>
+                        <div className={`w-20 h-20 rounded-xl flex items-center justify-center text-3xl font-black border-2 transition-all duration-500 ${step > 1 ? 'bg-blue-600 text-white border-blue-400' : 'bg-slate-800 text-slate-400 border-slate-600'}`}>
+                            {b}
+                        </div>
+                        <div className="font-mono text-xs text-slate-500 mt-2">{b.toString(2).padStart(3, '0')}</div>
+                    </div>
+                </div>
+            </div>
+
+            <p className="text-center text-sm text-pink-300 mt-6 italic">
+                {steps[step].desc}
+            </p>
+        </div>
+    );
+};
+
+// --- MAIN PAGE ---
+
+export default function Lecture5Page() {
+    const scrollTo = (id: string) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    return (
+        <div className="min-h-screen bg-[#020617] text-slate-200 font-sans pb-32">
+
+            {/* HEADER */}
+            <header className="fixed top-0 left-0 right-0 h-16 bg-[#020617]/90 backdrop-blur-md border-b border-slate-800 z-50 flex items-center justify-between px-6 md:px-12">
+                <div className="flex items-center gap-3">
+                    <img src="/cunits/logo.png" alt="C-Units Logo" className="w-8 h-8 rounded-lg shadow-lg shadow-blue-900/20" />
+                    <div className="hidden md:block">
+                        <h1 className="font-bold text-white text-sm leading-tight">Bitwise Wizards</h1>
+                        <p className="text-[10px] text-slate-500 uppercase tracking-widest">Unit 1 • Lecture 5</p>
+                    </div>
+                </div>
+                <nav className="flex gap-1 bg-slate-900/50 p-1 rounded-full border border-slate-800">
+                    {[
+                        { id: 'basics', label: 'Binary Basics', icon: Hash },
+                        { id: 'binary', label: 'Gates', icon: Binary },
+                        { id: 'negative', label: 'Negation', icon: Minus },
+                        { id: 'manipulate', label: 'Manipulator', icon: Cpu }
+                    ].map(item => (
+                        <button
+                            key={item.id}
+                            onClick={() => scrollTo(item.id)}
+                            className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+                        >
+                            <item.icon size={14} />
+                            <span className="hidden sm:inline">{item.label}</span>
+                        </button>
+                    ))}
+                </nav>
+            </header>
+
+            <main className="pt-32 px-6 md:px-12 max-w-7xl mx-auto space-y-32">
+
+                {/* HERO */}
+                <div className="text-center space-y-6">
+                    <div className="inline-flex items-center gap-2 bg-purple-900/20 border border-purple-500/30 text-purple-300 px-4 py-1.5 rounded-full text-xs font-bold animate-fade-in-up">
+                        <Cpu size={14} /> God Level Access
+                    </div>
+                    <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight">
+                        Entering the <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-white">Matrix</span>
+                    </h1>
+                    <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                        Forget decimal numbers. Today you learn to speak the native tongue of the CPU:
+                        <strong> Binary</strong>. This is where C becomes a superpower.
+                    </p>
+                </div>
+
+                {/* SECTION 0: BINARY BASICS */}
+                <section id="basics" className="scroll-mt-24">
+                    <SectionHeader title="Binary Foundations" icon={Hash} color="blue" />
+
+                    <p className="text-slate-400 mb-8">
+                        Before we manipulate bits, we must understand them. Every integer is just a sum of Powers of 2.
+                        Toggle the bits below to see how decimal and hex values are built.
+                    </p>
+
+                    <BinaryAnvil />
+                </section>
+
+                {/* SECTION 1: BITWISE LOGIC */}
+                <section id="binary" className="scroll-mt-24">
+                    <SectionHeader title="Bitwise Logic Gates" icon={Binary} color="purple" />
+
+                    <div className="prose prose-invert max-w-none mb-8">
+                        <p className="text-slate-400 text-lg">
+                            Standard operators compare <i>values</i>. Bitwise operators compare <i>bits</i>.
+                            This allows for parallel processing of 32 or 64 boolean flags at once.
+                        </p>
+                    </div>
+
+                    <BitwiseBunker />
+
+                    <div className="grid md:grid-cols-3 gap-6 mt-8">
+                        <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                            <h4 className="font-bold text-white mb-2 flex items-center gap-2"><Layers size={16} /> AND (&)</h4>
+                            <p className="text-xs text-slate-400">Used for <strong>Masking</strong>. Turns bits OFF. x & 0 always equals 0.</p>
+                        </div>
+                        <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                            <h4 className="font-bold text-white mb-2 flex items-center gap-2"><Layers size={16} /> OR (|)</h4>
+                            <p className="text-xs text-slate-400">Used for <strong>Setting</strong>. Turns bits ON. x | 1 always equals 1.</p>
+                        </div>
+                        <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                            <h4 className="font-bold text-white mb-2 flex items-center gap-2"><Layers size={16} /> XOR (^)</h4>
+                            <p className="text-xs text-slate-400">Used for <strong>Toggling</strong>. Flips bits. 1 ^ 1 = 0, 0 ^ 1 = 1.</p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* SECTION 2: NEGATIVE NUMBERS */}
+                <section id="negative" className="scroll-mt-24">
+                    <SectionHeader title="The NOT Operator & Negatives" icon={Minus} color="red" />
+
+                    <div className="grid md:grid-cols-2 gap-8 mb-8">
+                        <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                            <h3 className="font-bold text-white mb-2">The NOT Operator (~)</h3>
+                            <p className="text-sm text-slate-400 mb-4">
+                                Also called "One's Complement". It simply flips every single bit. 0 becomes 1, 1 becomes 0.
+                            </p>
+                            <CodeBlock code={`int a = 5; // 00000101\nint b = ~a; // 11111010 (-6)`} />
+                        </div>
+
+                        <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-700">
+                            <h3 className="font-bold text-white mb-2">Two's Complement</h3>
+                            <p className="text-sm text-slate-400 mb-4">
+                                How do we store -5? We can't just put a "-" sign in memory.
+                                The standard rule is: <strong>Invert all bits, then Add 1</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <TwosComplementLab />
+                </section>
+
+                {/* SECTION 3: SHIFTS & MANIPULATION */}
+                <section id="manipulate" className="scroll-mt-24">
+                    <SectionHeader title="Bit Manipulation Mastery" icon={Cpu} color="green" />
+
+                    <ShiftVisualizer />
+
+                    <DeepDiveCard title="The Holy Quartet of Bit Manipulation" variant="green">
+                        <p>Every systems programmer must memorize these patterns. Assume <code>k</code> is the bit index.</p>
+                        <ul className="mt-4 space-y-4 font-mono text-sm">
+                            <li className="flex gap-4 items-center">
+                                <span className="bg-green-900/50 text-green-400 px-2 py-1 rounded">SET</span>
+                                <code>x | (1 &lt;&lt; k)</code>
+                                <span className="text-slate-500 text-xs font-sans">// Force bit to 1</span>
+                            </li>
+                            <li className="flex gap-4 items-center">
+                                <span className="bg-red-900/50 text-red-400 px-2 py-1 rounded">CLEAR</span>
+                                <code>x & ~(1 &lt;&lt; k)</code>
+                                <span className="text-slate-500 text-xs font-sans">// Force bit to 0</span>
+                            </li>
+                            <li className="flex gap-4 items-center">
+                                <span className="bg-blue-900/50 text-blue-400 px-2 py-1 rounded">TOGGLE</span>
+                                <code>x ^ (1 &lt;&lt; k)</code>
+                                <span className="text-slate-500 text-xs font-sans">// Flip bit state</span>
+                            </li>
+                            <li className="flex gap-4 items-center">
+                                <span className="bg-yellow-900/50 text-yellow-400 px-2 py-1 rounded">CHECK</span>
+                                <code>x & (1 &lt;&lt; k)</code>
+                                <span className="text-slate-500 text-xs font-sans">// Is bit 1?</span>
+                            </li>
+                        </ul>
+                    </DeepDiveCard>
+
+                    <BitManipulator />
+                </section>
+
+                {/* SECTION 4: TRICKS */}
+                <section id="tricks" className="scroll-mt-24">
+                    <SectionHeader title="Hacker's Grimoire" icon={Zap} color="blue" />
+
+                    <p className="text-slate-400 mb-8">
+                        Ancient C spells used to optimize code before compilers were smart. Still useful in embedded systems and interviews.
+                    </p>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-[#0f172a] p-6 rounded-xl border border-slate-700">
+                            <h4 className="font-bold text-white mb-3 flex items-center gap-2"><Power size={16} className="text-yellow-400" /> Power of 2 Check</h4>
+                            <p className="text-xs text-slate-400 mb-3">
+                                Powers of 2 have only one bit set (e.g., 4 is 100, 8 is 1000). Subtracting 1 flips all lower bits (3 is 011).
+                            </p>
+                            <CodeBlock code={`bool isPowerOfTwo(int n) {\n  return (n > 0) && ((n & (n - 1)) == 0);\n}`} />
+                        </div>
+
+                        <div className="bg-[#0f172a] p-6 rounded-xl border border-slate-700">
+                            <h4 className="font-bold text-white mb-3 flex items-center gap-2"><Shuffle size={16} className="text-pink-400" /> The XOR Swap</h4>
+                            <p className="text-xs text-slate-400 mb-3">Swapping without a temp variable. (Warning: Compiler optimization often beats this).</p>
+                            <CodeBlock code={`a ^= b;\nb ^= a;\na ^= b;`} />
+                        </div>
+                    </div>
+
+                    <XorSwap />
+                </section>
+
+            </main>
+
+            {/* FOOTER */}
+            <footer className="mt-32 border-t border-slate-800 bg-[#020617] py-12 text-center text-slate-600 text-sm">
+                <p>C Programming Course • Unit 1 • Lecture 5</p>
+            </footer>
+        </div>
+    );
+}
