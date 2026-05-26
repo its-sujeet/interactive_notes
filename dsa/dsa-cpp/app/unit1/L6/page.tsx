@@ -230,7 +230,7 @@ const BinarySearchGame = () => {
         }
 
         let result = '';
-        let newStatus = status;
+        let newStatus: 'playing' | 'won' | 'lost' = status;
 
         if (g === target) {
             result = '🎯 CORRECT!';
