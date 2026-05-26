@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BookOpen, ArrowRight, Code, Terminal, Layers } from 'lucide-react';
+import { BookOpen, ArrowRight, Code, Terminal, Layers, FileCode } from 'lucide-react';
 
 const units = [
   { id: 1, title: "Concepts and Basics of C++ Programming", description: 'Lectures: 6', icon: Terminal },
