@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Code, Database, RefreshCcw, Merge, Target } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Code, Database, RefreshCcw, Merge, Target, Play } from 'lucide-react';
 
 // --- Shared Components ---
 const TheoryCard = ({ title, children, icon: Icon }: { title: string, children: React.ReactNode, icon?: any }) => (
