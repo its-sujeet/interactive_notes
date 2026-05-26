@@ -1,4 +1,6 @@
-"use client";
+const fs = require('fs');
+
+const content = `"use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Code, Database, RefreshCcw, Merge, Target } from 'lucide-react';
@@ -96,14 +98,14 @@ const ReverseVisualizer = () => {
                                     {isNext && <span className="text-[10px] text-blue-400 font-bold font-mono">next</span>}
                                 </div>
                                 
-                                <div className={`flex border ${isCurr ? 'border-emerald-500 bg-emerald-900/20' : 'border-slate-600 bg-slate-800'} rounded-lg overflow-hidden shadow-lg`}>
+                                <div className={\`flex border \${isCurr ? 'border-emerald-500 bg-emerald-900/20' : 'border-slate-600 bg-slate-800'} rounded-lg overflow-hidden shadow-lg\`}>
                                     <div className="px-4 py-3 border-r border-slate-700 font-bold text-white bg-slate-700/50 min-w-[3rem] text-center">
                                         {val}
                                     </div>
                                 </div>
                                 
                                 {i < nodes.length - 1 && (
-                                    <div className={`absolute top-3 -right-8 z-10 ${(state === 'running' && i < pointers.curr) ? 'rotate-180 text-purple-500' : 'text-orange-500'}`}>
+                                    <div className={\`absolute top-3 -right-8 z-10 \${(state === 'running' && i < pointers.curr) ? 'rotate-180 text-purple-500' : 'text-orange-500'}\`}>
                                         <ArrowRight size={20} />
                                     </div>
                                 )}
@@ -180,7 +182,7 @@ const TortoiseHareVisualizer = () => {
                                     {isFast && <span className="text-[10px] text-orange-400 font-bold font-mono bg-orange-500/20 px-2 py-0.5 rounded mt-1">fast (x2)</span>}
                                 </div>
                                 
-                                <div className={`flex border ${isSlow && isFast ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]' : isSlow ? 'border-emerald-500' : isFast ? 'border-orange-500' : 'border-slate-600'} rounded-full w-12 h-12 items-center justify-center bg-slate-800 shadow-lg`}>
+                                <div className={\`flex border \${isSlow && isFast ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]' : isSlow ? 'border-emerald-500' : isFast ? 'border-orange-500' : 'border-slate-600'} rounded-full w-12 h-12 items-center justify-center bg-slate-800 shadow-lg\`}>
                                     <span className="font-bold text-white">{val}</span>
                                 </div>
                                 
@@ -245,7 +247,7 @@ export default function LecturePage() {
 
                     <CodeBlock 
                         title="ReverseList.cpp"
-                        code={`Node* reverseList(Node* head) {
+                        code={\`Node* reverseList(Node* head) {
     Node* prev = nullptr;
     Node* curr = head;
     Node* next = nullptr;
@@ -259,7 +261,7 @@ export default function LecturePage() {
     }
     
     return prev; // prev is now pointing to the new head
-}`}
+}\`}
                     />
 
                     <TheoryCard title="2. Finding the Middle Node" icon={Target}>
@@ -278,7 +280,7 @@ export default function LecturePage() {
 
                     <CodeBlock 
                         title="FindMiddle.cpp"
-                        code={`Node* findMiddle(Node* head) {
+                        code={\`Node* findMiddle(Node* head) {
     if (head == nullptr) return nullptr;
     
     Node* slow = head;
@@ -291,7 +293,7 @@ export default function LecturePage() {
     }
     
     return slow; // Slow is now at the middle
-}`}
+}\`}
                     />
 
                     <TheoryCard title="3. Merging Two Sorted Lists" icon={Merge}>
@@ -306,7 +308,7 @@ export default function LecturePage() {
 
                     <CodeBlock 
                         title="MergeSorted.cpp"
-                        code={`Node* mergeTwoLists(Node* list1, Node* list2) {
+                        code={\`Node* mergeTwoLists(Node* list1, Node* list2) {
     Node dummy(0); // Stack allocated dummy node
     Node* tail = &dummy;
     
@@ -326,7 +328,7 @@ export default function LecturePage() {
     if (list2 != nullptr) tail->next = list2;
     
     return dummy.next; // The real head of the merged list
-}`}
+}\`}
                     />
 
                     <div className="bg-purple-900/20 border border-purple-500/30 rounded-2xl p-8 text-center mt-12 mb-20 shadow-[0_0_30px_rgba(168,85,247,0.1)]">
@@ -341,3 +343,7 @@ export default function LecturePage() {
         </div>
     );
 }
+`;
+
+fs.writeFileSync('/home/anon/Desktop/interactive-notes/dsa/dsa-cpp/app/unit2/L3/page.tsx', content);
+console.log("DSA Unit 2 Lecture 3 Generation Complete.");

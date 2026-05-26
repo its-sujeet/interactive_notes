@@ -1,4 +1,6 @@
-"use client";
+const fs = require('fs');
+
+const content = `"use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Code, Database, Play, MousePointerClick, RefreshCw, Trash2, Plus } from 'lucide-react';
@@ -216,9 +218,9 @@ const DeletionVisualizer = () => {
                         {nodes.map((node, i) => {
                             const isTarget = node.id === targetId;
                             return (
-                                <div key={node.id} className={`flex items-center gap-1 transition-all duration-500 ${isTarget ? 'opacity-20 scale-90 blur-[2px]' : ''}`}>
-                                    <div className={`flex border ${isTarget ? 'border-red-500 bg-red-900/20' : 'border-slate-600 bg-slate-800'} rounded-lg overflow-hidden shadow-lg`}>
-                                        <div className={`px-4 py-3 border-r ${isTarget ? 'border-red-500/50 text-red-400' : 'border-slate-700 text-white'} bg-slate-700/50 min-w-[3rem] text-center`}>
+                                <div key={node.id} className={\`flex items-center gap-1 transition-all duration-500 \${isTarget ? 'opacity-20 scale-90 blur-[2px]' : ''}\`}>
+                                    <div className={\`flex border \${isTarget ? 'border-red-500 bg-red-900/20' : 'border-slate-600 bg-slate-800'} rounded-lg overflow-hidden shadow-lg\`}>
+                                        <div className={\`px-4 py-3 border-r \${isTarget ? 'border-red-500/50 text-red-400' : 'border-slate-700 text-white'} bg-slate-700/50 min-w-[3rem] text-center\`}>
                                             {node.val}
                                         </div>
                                         <div className="px-3 py-3 text-xs text-orange-400 font-mono bg-slate-900/50 flex items-center justify-center">
@@ -226,7 +228,7 @@ const DeletionVisualizer = () => {
                                         </div>
                                     </div>
                                     {i < nodes.length - 1 && (
-                                        <div className={`text-orange-500 mx-2 transition-all duration-500 ${isTarget ? 'opacity-0 w-0 -mx-2' : ''}`}>
+                                        <div className={\`text-orange-500 mx-2 transition-all duration-500 \${isTarget ? 'opacity-0 w-0 -mx-2' : ''}\`}>
                                             <ArrowRight size={20} />
                                         </div>
                                     )}
@@ -299,11 +301,11 @@ export default function LecturePage() {
                         </p>
                         <CodeBlock 
                             title="InsertHead.cpp"
-                            code={`void insertAtHead(Node*& head, int val) {
+                            code={\`void insertAtHead(Node*& head, int val) {
     Node* newNode = new Node(val); // 1. Create node
     newNode->next = head;          // 2. Point new node's next to current head
     head = newNode;                // 3. Update head to be the new node
-}`}
+}\`}
                         />
                         <h4 className="font-bold text-emerald-400 mt-8 mb-2">2. Insert at End (Tail)</h4>
                         <p className="mb-4">
@@ -311,7 +313,7 @@ export default function LecturePage() {
                         </p>
                         <CodeBlock 
                             title="InsertTail.cpp"
-                            code={`void insertAtTail(Node*& head, int val) {
+                            code={\`void insertAtTail(Node*& head, int val) {
     Node* newNode = new Node(val);
     
     if (head == nullptr) {         // Edge case: Empty list
@@ -324,7 +326,7 @@ export default function LecturePage() {
         temp = temp->next;
     }
     temp->next = newNode;          // Link the last node to the new node
-}`}
+}\`}
                         />
                     </TheoryCard>
 
@@ -337,13 +339,13 @@ export default function LecturePage() {
                         <h4 className="font-bold text-red-400 mt-6 mb-2">Delete from Beginning (Head)</h4>
                         <CodeBlock 
                             title="DeleteHead.cpp"
-                            code={`void deleteAtHead(Node*& head) {
+                            code={\`void deleteAtHead(Node*& head) {
     if (head == nullptr) return; // Edge case: Empty list
     
     Node* temp = head;           // Store the current head
     head = head->next;           // Move head to the next node
     delete temp;                 // FREE THE MEMORY!
-}`}
+}\`}
                         />
                         
                         <div className="bg-red-900/20 border border-red-500/30 p-4 rounded-xl mt-6">
@@ -366,3 +368,7 @@ export default function LecturePage() {
         </div>
     );
 }
+`;
+
+fs.writeFileSync('/home/anon/Desktop/interactive-notes/dsa/dsa-cpp/app/unit2/L2/page.tsx', content);
+console.log("DSA Unit 2 Lecture 2 Generation Complete.");

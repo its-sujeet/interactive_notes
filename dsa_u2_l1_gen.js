@@ -1,4 +1,6 @@
-"use client";
+const fs = require('fs');
+
+const content = `"use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Code, Database, Box, Server, Play, Plus, RefreshCw, Cpu, Layers } from 'lucide-react';
@@ -45,7 +47,7 @@ const MemoryComparison = () => {
                     <p className="text-sm text-slate-400 mb-4">Memory is allocated in a single, continuous block. If there isn't enough contiguous space, allocation fails or requires a complete reallocation.</p>
                     <div className="grid grid-cols-10 gap-1 bg-[#0d1117] p-4 rounded-xl border border-slate-800">
                         {Array.from({length: 10}).map((_, i) => (
-                            <div key={i} className={`h-12 flex flex-col items-center justify-center rounded border ${[2,3,4,5].includes(i) ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : 'bg-slate-800/50 border-slate-700 text-slate-600'}`}>
+                            <div key={i} className={\`h-12 flex flex-col items-center justify-center rounded border \${[2,3,4,5].includes(i) ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : 'bg-slate-800/50 border-slate-700 text-slate-600'}\`}>
                                 <span className="text-xs font-mono opacity-50">0x{1000 + i*4}</span>
                                 <span className="font-bold">{[2,3,4,5].includes(i) ? [10,20,30,40][i-2] : '-'}</span>
                             </div>
@@ -69,13 +71,13 @@ const MemoryComparison = () => {
                             const node = nodeMap[i];
 
                             return (
-                                <div key={i} className={`h-24 flex flex-col rounded border ${isNode ? `bg-${node.color}-500/10 border-${node.color}-500` : 'bg-slate-800/50 border-slate-700'} relative`}>
+                                <div key={i} className={\`h-24 flex flex-col rounded border \${isNode ? \`bg-\${node.color}-500/10 border-\${node.color}-500\` : 'bg-slate-800/50 border-slate-700'} relative\`}>
                                     <div className="h-6 border-b border-slate-700/50 flex items-center justify-center text-[10px] font-mono text-slate-500 bg-black/20">
                                         0x{1000 + i*4}
                                     </div>
                                     {isNode ? (
                                         <div className="flex-1 flex flex-col">
-                                            <div className={`flex-1 flex items-center justify-center font-bold text-${node.color}-400 text-sm`}>
+                                            <div className={\`flex-1 flex items-center justify-center font-bold text-\${node.color}-400 text-sm\`}>
                                                 {node.val}
                                             </div>
                                             <div className="h-6 border-t border-slate-700/50 flex items-center justify-center text-[10px] font-mono text-slate-400 bg-slate-900/50">
@@ -220,7 +222,7 @@ const ListTypes = () => {
                     <button 
                         key={t}
                         onClick={() => setType(t)}
-                        className={`px-6 py-2 rounded-lg font-bold text-sm transition-all ${type === t ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
+                        className={\`px-6 py-2 rounded-lg font-bold text-sm transition-all \${type === t ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}\`}
                     >
                         {t.charAt(0).toUpperCase() + t.slice(1)} List
                     </button>
@@ -394,7 +396,7 @@ export default function LecturePage() {
                         </p>
                         <CodeBlock 
                             title="Node.cpp"
-                            code={`struct Node {
+                            code={\`struct Node {
     int data;           // The payload
     Node* next;         // Pointer to the next Node
     
@@ -403,7 +405,7 @@ export default function LecturePage() {
         data = val;
         next = nullptr; // Always initialize pointers to null!
     }
-};`}
+};\`}
                         />
                         <p className="mt-4">
                             The very first node in the list is called the <strong>Head</strong>. If the <code>head</code> pointer is <code>nullptr</code>, the list is completely empty. The very last node in the list always has its <code>next</code> pointer set to <code>nullptr</code> to signify the end of the chain.
@@ -443,3 +445,7 @@ export default function LecturePage() {
         </div>
     );
 }
+`;
+
+fs.writeFileSync('/home/anon/Desktop/interactive-notes/dsa/dsa-cpp/app/unit2/L1/page.tsx', content);
+console.log("DSA Unit 2 Lecture 1 Generation Complete.");

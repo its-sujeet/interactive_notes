@@ -1,4 +1,6 @@
-"use client";
+const fs = require('fs');
+
+const content = `"use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Code, Database, Search, Target, Unlock } from 'lucide-react';
@@ -99,11 +101,11 @@ const FloydsAlgorithm = () => {
                             <div key={i} className="flex flex-col items-center gap-2 relative z-10">
                                 {/* Pointers */}
                                 <div className="absolute -top-12 flex flex-col items-center h-10 w-24">
-                                    {isSlow && <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded ${isCollision ? 'bg-red-500 text-white' : 'text-emerald-400 bg-emerald-500/20'}`}>slow</span>}
-                                    {isFast && <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded mt-1 ${isCollision ? 'bg-red-500 text-white' : 'text-blue-400 bg-blue-500/20'}`}>fast (x2)</span>}
+                                    {isSlow && <span className={\`text-[10px] font-bold font-mono px-2 py-0.5 rounded \${isCollision ? 'bg-red-500 text-white' : 'text-emerald-400 bg-emerald-500/20'}\`}>slow</span>}
+                                    {isFast && <span className={\`text-[10px] font-bold font-mono px-2 py-0.5 rounded mt-1 \${isCollision ? 'bg-red-500 text-white' : 'text-blue-400 bg-blue-500/20'}\`}>fast (x2)</span>}
                                 </div>
                                 
-                                <div className={`flex border ${isCollision ? 'border-red-500 bg-red-900/50 shadow-[0_0_20px_rgba(239,68,68,0.5)] scale-110' : isSlow ? 'border-emerald-500' : isFast ? 'border-blue-500' : 'border-slate-600'} rounded-full w-12 h-12 items-center justify-center bg-slate-800 shadow-lg transition-all duration-300`}>
+                                <div className={\`flex border \${isCollision ? 'border-red-500 bg-red-900/50 shadow-[0_0_20px_rgba(239,68,68,0.5)] scale-110' : isSlow ? 'border-emerald-500' : isFast ? 'border-blue-500' : 'border-slate-600'} rounded-full w-12 h-12 items-center justify-center bg-slate-800 shadow-lg transition-all duration-300\`}>
                                     <span className="font-bold text-white">{val}</span>
                                 </div>
                                 
@@ -197,7 +199,7 @@ export default function LecturePage() {
 
                     <CodeBlock 
                         title="DetectCycle.cpp"
-                        code={`bool hasCycle(Node *head) {
+                        code={\`bool hasCycle(Node *head) {
     if (head == nullptr) return false;
     
     Node* slow = head;
@@ -213,7 +215,7 @@ export default function LecturePage() {
     }
     
     return false; // Fast reached NULL, no loop.
-}`}
+}\`}
                     />
 
                     <TheoryCard title="Finding the Starting Node of the Loop" icon={Search}>
@@ -234,7 +236,7 @@ export default function LecturePage() {
 
                     <CodeBlock 
                         title="FindLoopStart.cpp"
-                        code={`Node* detectCycleStart(Node *head) {
+                        code={\`Node* detectCycleStart(Node *head) {
     if (head == nullptr) return nullptr;
     
     Node* slow = head;
@@ -261,7 +263,7 @@ export default function LecturePage() {
     }
     
     return slow; // The start of the loop!
-}`}
+}\`}
                     />
 
                     <TheoryCard title="Removing the Loop" icon={Unlock}>
@@ -285,3 +287,7 @@ export default function LecturePage() {
         </div>
     );
 }
+`;
+
+fs.writeFileSync('/home/anon/Desktop/interactive-notes/dsa/dsa-cpp/app/unit2/L4/page.tsx', content);
+console.log("DSA Unit 2 Lecture 4 Generation Complete.");
